@@ -31,45 +31,37 @@
 
 using namespace std;
 
-vector<int> solution(queue<int> data, int x) {
-    vector<int> res;
-    int sum = 0;
-    while (!data.empty()) {
-        int top = data.front();
-        data.pop();
-        if (sum + top == x) {
-            if (data.size() != 0) {
-                data.push(top);
-            } else {
-                res.push_back(top);
-                for (int i = res.size() - 2; i >= 0;  --i) {
-                    res[i + 1] = res[i];
-                }
-                res[0] = top;
-                return res;
-            }
-        } else {
-            res.push_back(top);
-            sum += top;
-        }
-    }
-    return res;
-}
-
 void solve() {
-    int n, x;
-    cin >> n >> x;
-    queue<int> data;
+    int n, m, x;
+    cin >> n >> m >> x;
+    int data[n]; // val to tower
+    int towers[n];
     int sum = 0;
     for (int i = 0; i < n; ++i) {
-        int w;
-        cin >> w;
-        data.push(w);
-        sum += w;
+        cin >> data[i];
+        sum += data[i];
     }
-    if (sum != x) {
+    int goal = sum / m;
+    int max = 0, min = 1000000000;
+    int currTower = 1;
+    int curr = 0;
+    for (int i = 0; i < n; ++i) {
+        if (curr >= goal) {
+            ++currTower;
+            if (curr > max) {
+                max = curr;
+            }
+            if (curr < min) {
+                min = curr;
+            }
+            curr = 0;
+        }
+        towers[i] = currTower;
+        curr += data[i];
+    }
+    if (max - min <= x) {
         cout << "YES" << nl;
-        for (int i: solution(data, x)) {
+        for (int i: towers) {
             cout << i << " ";
         }
         cout << nl;
@@ -87,5 +79,6 @@ int main() {
     for (int i = 0; i < T; ++i) {
         solve();
     }
+
     return 0;
 }
