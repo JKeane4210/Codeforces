@@ -1,5 +1,6 @@
 //
 // Created by Jonny Keane on 5/2/21.
+// Credit to Nick Johnson for repointing my thoughts
 //
 
 #include <bits/stdc++.h>
@@ -31,45 +32,40 @@
 
 using namespace std;
 
+struct Tower {
+    Tower(int h, int i){
+        height = h;
+        index = i;
+    }
+    int height;
+    int index;
+
+    friend bool operator<(const Tower& a, const Tower& b);
+};
+
+bool operator<(const Tower& a, const Tower& b) {
+    return a.height > b.height;
+}
+
 void solve() {
     int n, m, x;
     cin >> n >> m >> x;
-    int data[n]; // val to tower
-    int towers[n];
-    int sum = 0;
+    priority_queue<Tower> pq;
+    for (int i = 0; i < m; ++i) {
+        Tower t(0, i + 1);
+        pq.push(t);
+    }
+    cout << "YES" << nl;
     for (int i = 0; i < n; ++i) {
-        cin >> data[i];
-        sum += data[i];
+        Tower top = pq.top();
+        pq.pop();
+        int block;
+        cin >> block;
+        top.height += block;
+        cout << top.index << " ";
+        pq.push(top);
     }
-    double goal = (double)sum / m - (double)x / 2 + 1;
-    int max = 0, min = 1000000000;
-    int currTower = 1;
-    int curr = 0;
-    for (int i = 0; i < n; ++i) {
-        if (curr > goal) {
-            if (currTower < m) {
-                ++currTower;
-            }
-            if (curr > max) {
-                max = curr;
-            }
-            if (curr < min) {
-                min = curr;
-            }
-            curr = 0;
-        }
-        towers[i] = currTower;
-        curr += data[i];
-    }
-    if (max - min <= x) {
-        cout << "YES" << nl;
-        for (int i: towers) {
-            cout << i << " ";
-        }
-        cout << nl;
-    } else {
-        cout << "NO" << nl;
-    }
+    cout << nl;
 }
 
 int main() {
