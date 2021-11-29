@@ -15,3 +15,7 @@ add_executable(Duel2 Duels/Duel2b.cpp)
 add_executable(Duel3 Duels/Duel3.cpp)
 add_executable(SM_Duel Duels/Sam_Mitchell_Duel.cpp)
 add_executable(Duel4 Duels/Duel4.cpp)
+add_executable(Duel5 Duels/Duel5.cpp)
+
+add_executable(DivanAndAStore PracticeProblems/DivanAndAStore.cpp)
+
