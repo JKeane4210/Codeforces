@@ -19,4 +19,5 @@ add_executable(Duel5 Duels/Duel5.cpp)
 
 add_executable(DivanAndAStore PracticeProblems/DivanAndAStore.cpp)
 add_executable(DivanAndANewProject PracticeProblems/DivanAndANewProject.cpp)
+add_executable(DivanAndBitwiseOperations PracticeProblems/DivanAndBitwiseOperations.cpp)
 
