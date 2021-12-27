@@ -4,6 +4,8 @@
 
 #include <bits/stdc++.h>
 
+#define ll long long long long
+#define ld long long double
 #define pb push_back
 
 #define V vector
@@ -29,39 +31,34 @@
 
 using namespace std;
 
+long long fdiv(long long x, long long y) {
+    if (x >= 0)  return x / y;
+    else return (x - y + 1) / y;
+}
+
 void solve() {
-    int n;
+    long long n;
     long long k;
     cin >> n >> k;
-    long long sum = 0;
-    int arr[n];
+    long long arr[n];
     for (int i = 0; i < n; ++i) {
         cin >> arr[i];
-        sum += arr[i];
     }
     sort(arr, arr + n);
-    long long div = min((long long)arr[0], k / n);
-    long long min_ = LONG_LONG_MAX;
-    bool keep_trying = true;
-    while (keep_trying) {
-        long long steps = 0;
-        steps += abs(arr[0] - div);
-        long long curr_sum = sum - abs(arr[0] - div);
-        int ind = n - 1;
-        while (curr_sum > k) {
-            curr_sum -= abs(arr[ind] - div);
-            ++steps;
-            --ind;
-        }
-        if (steps <= min_) {
-//            cout << "*" << div << " " << steps << endl;
-            min_ = steps;
-            --div;
-        } else {
-            keep_trying = false;
-        }
+    reverse(arr, arr + n);
+    long long sum_rem = 0;
+    for (int i = 0; i < n - 1; ++i) {
+        sum_rem += arr[i];
     }
-    cout << min_ << endl;
+    long long min_moves = LONG_LONG_MAX;
+    for (long long i = 0; i < n; ++i) {
+        long long goal = k - sum_rem;
+        long long division = fdiv(goal, i + 1);
+        long long steps = i + max(arr[n - 1] - division, 0ll);
+        min_moves = min(min_moves, steps);
+        sum_rem -= arr[i];
+    }
+    cout << min_moves << endl;
 }
 
 int main() {
