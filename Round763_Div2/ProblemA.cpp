@@ -31,11 +31,39 @@
 
 using namespace std;
 
+void solve() {
+    int n, m, r, c, rd, cd;
+    cin >> n >> m >> r >> c >> rd >> cd;
+    int dr = 1;
+    int dc = 1;
+    int time = 0;
+    while (r != rd && c != cd) {
+        int nr = r + dr;
+        int nc = c + dc;
+        if (nr > n || nr < 1) {
+            dr = -dr;
+            nr = r + dr;
+        }
+        if (nc > m || nc < 1) {
+            dc = -dc;
+            nc = c + dc;
+        }
+        r = nr;
+        c = nc;
+        ++time;
+    }
+    cout << time << endl;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    // code here
+    int t;
+    cin >> t;
+    for (int i = 0; i < t; ++i) {
+        solve();
+    }
 
     return 0;
 }
