@@ -37,10 +37,16 @@ using namespace std;
 bool passes(int k, vector<int> a, const vector<int> & h) {
     for (int i = h.size() - 1; i >= 2; --i) {
         if (a[i] < k) return false;         // see if last is less than k (can't remove anything if < k)
-        int rem = min(a[i] - k, h[i]);      // you can donate a[i] - k elements, or h[i] --> WEIRD
+        int rem = min(a[i] - k, h[i]);      // you can donate a[i] - k elements, but you can have at most h[i] at this point following the order
+        a[i] -= 3 * (rem / 3);              // unnecessary but helpful for problem
         a[i - 1] += rem / 3;                // add the d value
         a[i - 2] += 2 * (rem / 3);          // add the d value
     }
+    cout << k << ": ";
+    for (int i = 0; i < h.size(); ++i) {
+        cout << a[i] << " ";
+    }
+    cout << endl;
     return min(a[0], a[1]) >= k;
 }
 
