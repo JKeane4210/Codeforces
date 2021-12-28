@@ -38,7 +38,7 @@ add_executable(120_F EducationalRound120_Div2/ProblemF.cpp)
 # Round 763 (Div. 2)
 add_executable(763_A Round763_Div2/ProblemA.cpp)
 add_executable(763_B Round763_Div2/ProblemB.cpp)
-add_executable(763_C Round763_Div2/ProblemC.cpp)
+add_executable(763_C Round763_Div2/ProblemC_Redo.cpp)
 add_executable(763_D Round763_Div2/ProblemD.cpp)
 add_executable(763_E Round763_Div2/ProblemE.cpp)
 
